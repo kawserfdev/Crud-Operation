@@ -16,7 +16,7 @@ class _New_CourseState extends State<New_Course> {
   TextEditingController _desCriptionController = TextEditingController();
 
   XFile? _courseImage;
-  // String? imageUrl;
+  String? imageUrl;
 
   chooseImageFromGallery() async {
     final ImagePicker _picker = ImagePicker();
@@ -24,25 +24,25 @@ class _New_CourseState extends State<New_Course> {
     setState(() {});
   }
 
-  // wrightData() async {
-  //   File imgFile = File(_courseImage!.path);
-  //   FirebaseStorage _storage = FirebaseStorage.instance;
-  //   UploadTask _uploadTask =
-  //       _storage.ref('Images').child(_courseImage!.path).putFile(imgFile);
-  //   TaskSnapshot snapshot = await _uploadTask;
-  //   imageUrl = await snapshot.ref.getDownloadURL();
-  //   print(imageUrl);
+  wrightData() async {
+    File imgFile = File(_courseImage!.path);
+    FirebaseStorage _storage = FirebaseStorage.instance;
+    UploadTask _uploadTask =
+        _storage.ref('Images').child(_courseImage!.path).putFile(imgFile);
+    TaskSnapshot snapshot = await _uploadTask;
+    imageUrl = await snapshot.ref.getDownloadURL();
+    print(imageUrl);
    
-  //   CollectionReference _course =
-  //       FirebaseFirestore.instance.collection("courses");
-  //   _course.add({ 
-  //     "course_name": _titleController.text,
-  //     "course_details": _desCriptionController.text,
-  //     "img": imageUrl,
-  //   });
-  //   print('SuccessFully Added');
-  //   Navigator.pop(context); 
-  // }
+    CollectionReference _course =
+        FirebaseFirestore.instance.collection("courses");
+    _course.add({ 
+      "course_name": _titleController.text,
+      "course_details": _desCriptionController.text,
+      "img": imageUrl,
+    });
+    print('SuccessFully Added');
+    Navigator.pop(context); 
+  }
 
   @override
   Widget build(BuildContext context) {
